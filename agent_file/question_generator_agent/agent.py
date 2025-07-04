@@ -3,6 +3,12 @@ from langchain_community.document_loaders import PyPDFLoader
 from google.adk import Agent, Runner
 from google.adk.agents import LlmAgent
 from google.adk.sessions import InMemorySessionService
+from dotenv import load_dotenv
+import sys
+import os
+load_dotenv()
+
+
 
 from jinja2 import Environment, FileSystemLoader
 def render_pdf_prompt():

@@ -5,6 +5,12 @@ from google.adk.agents import LlmAgent
 from google.adk.sessions import InMemorySessionService
 import asyncio
 from langchain_unstructured import UnstructuredLoader
+import sys
+import os   
+from dotenv import load_dotenv  
+from .test import playwright_loader, fetch_page
+
+load_dotenv()
 
 from jinja2 import Environment, FileSystemLoader
 def render_pdf_prompt():
@@ -14,23 +20,6 @@ def render_pdf_prompt():
     template = env.get_template('url_question_generator/url_prompt.j2')
     # Render the template with variables
     return template.render()
-
-async def create_url_loader(web_url: str):
-    """Asynchronously loads a web page and extracts its content. It returns a list of documents."""
-    # Initialize UnstructuredLoader with the provided web URL
-    loader = UnstructuredLoader(web_url=web_url)
-    docs = []
-    async for doc in loader.alazy_load():
-        docs.append(doc)
-    return docs
-
-async def fetch_page(page_url: str):
-    """Asynchronously fetches a web page and extracts its content."""
-    # Call the create_url_loader function to load the web page
-    docs = await create_url_loader(page_url)
-    for doc in docs:
-        print(doc.page_content)
-    return docs
 
 prompt = render_pdf_prompt()
 

@@ -3,10 +3,11 @@ from langchain_community.document_loaders import PyPDFLoader
 from google.adk import Agent, Runner
 from google.adk.agents import LlmAgent
 from google.adk.sessions import InMemorySessionService
-# from ..question_generator_agent.agent import root_agent as question_generator_agent
-
+from dotenv import load_dotenv
 import sys
 import os
+
+load_dotenv()
 
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
